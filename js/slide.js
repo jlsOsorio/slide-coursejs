@@ -119,7 +119,6 @@ export class Slide {
   }
 
   onResize() {
-    console.log("teste");
     setTimeout(() => {
       this.slidesConfig();
       this.changeSlide(this.index.active);
@@ -151,7 +150,7 @@ export class Slide {
   }
 }
 
-export class SlideNav extends Slide {
+export default class SlideNav extends Slide {
   constructor(slide, wrapper) {
     super(slide, wrapper);
     this.bindControlEvents();
@@ -172,7 +171,6 @@ export class SlideNav extends Slide {
     const control = document.createElement("ul");
     control.dataset.control = "slide";
 
-    console.log(this.slideArray);
     this.slideArray.forEach((item, index) => {
       control.innerHTML += `<li><a href="#slide${index + 1}">${
         index + 1
@@ -199,7 +197,8 @@ export class SlideNav extends Slide {
   }
 
   addControl(customControl) {
-    this.control = this.createControl(customControl) || this.createControl();
+    this.control =
+      document.querySelector(customControl) || this.createControl();
     this.controlArray = [...this.control.children];
 
     this.activeControlItem();
